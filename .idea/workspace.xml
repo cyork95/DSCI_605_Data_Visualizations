@@ -1,7 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3c502db-971e-4673-8c64-66b02371f11d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Final_Project/Cody_York_Final_Project_Code.R" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 2/M2_Lab1/Crop_Range_GOES0901_R (1).csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 2/M2_Lab1/DSCI_605_M2_Lab1_Cody_York.nb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 2/M2_Lab1/DSCI_605_M2_Lab1_Cody_York.rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 2/SAFI_clean.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 3/M3_Lab2/M3_Lab3_Cody_York.rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 3/M3_Lab2/best_box_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 3/M3_Lab2/best_bubble_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 4/Executive Review AI Project’s Requirements and Considerations.odt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 4/M4_Lab3/M4_Lab3_PCA_Cody_York.rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/Fouryears_all.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/M5_Lab4_Time_series_in_R_crime_data_Cody_York.nb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/M5_Lab4_Time_series_in_R_crime_data_Cody_York.rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/M5_Lab4_Time_series_in_R_crime_data_Cody_York_Test.Rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/M5_Lab4_Time_series_in_R_crime_data_Cody_York_Test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/ts_decomposed_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/ts_msts_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/ts_plot.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 5/M5_Lab4/ts_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/M6_Lab5_Spatial_Mapping_Cody_York.nb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/M6_Lab5_Spatial_Mapping_Cody_York.rmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.dbf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.prj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.sbn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.sbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.shp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.shx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.cpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.dbf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.prj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.shp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.shp.ea.iso.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.shp.iso.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 6/M6_Lab5/tl_2019_us_state/tl_2019_us_state.shx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 7/Interactive-Time-plots_Student.R" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 7/M7_Lab6/M7_Lab6_Shiny_Visualization_Cody_York.R" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module 7/M7_Lab6/hotel_bookings.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ancient-7-wonders-of-the-world-update.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="RMarkdown.notebook" />
+        <option value="R Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QIBnkEFFHnSsmMCiwJ1ptmWl6t" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cy_su\PycharmProjects\DSCI_605_Data_Visualizations\Final_Project" />
+      <recent name="C:\Users\cy_su\PycharmProjects\DSCI_605_Data_Visualizations\Module 7\M7_Lab6" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3c502db-971e-4673-8c64-66b02371f11d" name="Changes" comment="" />
+      <created>1685031383651</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685031383651</updated>
+      <workItem from="1685031385126" duration="2000" />
+      <workItem from="1685034152863" duration="2549000" />
+      <workItem from="1685044787172" duration="263000" />
+      <workItem from="1685476871547" duration="6953000" />
+      <workItem from="1685905796708" duration="1630000" />
+      <workItem from="1686084471835" duration="2138000" />
+      <workItem from="1686691323315" duration="2558000" />
+      <workItem from="1686840862604" duration="10351000" />
+      <workItem from="1687138230467" duration="563000" />
+      <workItem from="1687138811292" duration="2664000" />
+      <workItem from="1687142918334" duration="378000" />
+      <workItem from="1687143361691" duration="968000" />
+      <workItem from="1687700028751" duration="6625000" />
+      <workItem from="1689181788179" duration="1401000" />
+      <workItem from="1689486059549" duration="9426000" />
+      <workItem from="1691521761426" duration="26000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="the-r-line">
+          <url>file://$PROJECT_DIR$/Module 7/M7_Lab6/M7_Lab6_Shiny_Visualization_Cody_York.R</url>
+          <line>5</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

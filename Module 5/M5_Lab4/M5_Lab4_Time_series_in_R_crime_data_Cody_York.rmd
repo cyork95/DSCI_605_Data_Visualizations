@@ -1,0 +1,116 @@
+---
+title: "M5_Lab4_Time_series_in_R_crime_data_Cody_York"
+output: html_notebook
+---
+
+**Import Libraries:** Also setting working directory.
+```{r}
+library(tidyr)
+library(dbplyr)
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(ggfortify)
+library(plotly)
+library(forecast)
+
+setwd('C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations/Module 5/M5_Lab4/')
+```
+
+**Read the data from the CSV file:**
+Convert the "Date" column to a datetime format
+Filter the data for the desired two-year period.
+```{r}
+data <- read.csv("Fouryears_all.csv")
+
+data$Date <- ymd_hms(data$Date)
+
+start_date <- as.Date("2019-09-01")
+end_date <- as.Date("2021-09-01")
+filtered_data <- data %>%
+  filter(Date >= start_date & Date <= end_date & Primary.Type == "BATTERY")
+```
+
+**Data Wrangling:**
+Aggregate the data by hourly intervals.
+Display the aggregated data.
+```{r}
+data_hourly <- filtered_data %>%
+  mutate(Hour = floor_date(Date, "hour")) %>%
+  group_by(Hour) %>%
+  summarise(Count = n()) %>%
+  ungroup()
+
+```
+
+**Time Series Visualization**
+Create a time series object.
+Plot the time series.
+Show the plot.
+Save the image.
+
+What I did to improve the visualization:
+    1. Changed Line Color and Type.
+    2. Added point density.
+    3. Legend and Title Positions
+    4. Added a color palette
+```{r}
+plot <- ggplot(data = data_hourly, aes(x = Hour, y = Count)) +
+  geom_smooth(aes(color = "Count"), se = FALSE, size = 1.2, linetype = "solid") +
+  geom_point(size = 2, color = "blue", alpha = 0.5) +
+  scale_x_datetime(date_labels = "%b %d, %Y", date_breaks = "1 day") +
+  scale_color_brewer(palette = "Set1", name = "Metrics") +
+  labs(x = "Date (Year-Month-Day)",
+       y = "Count",
+       title = "2-Year Series of Battery Crimes In California",
+       subtitle = "Hourly Data Aggregated by Day",
+       caption = "Source: Chicago Police Department’s CLEAR (Citizen Law Enforcement Analysis and Reporting) System") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 10, color = "darkblue"),
+        axis.title = element_text(size = 12, face = "bold"),
+        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(size = 12, face = "italic", hjust = 0.5),
+        plot.caption = element_text(size = 8, hjust = 1),
+        legend.position = "bottom",
+        panel.grid.major = element_line(color = "gray", size = 0.1),
+        panel.grid.minor = element_line(color = "gray", size = 0.05),
+        plot.background = element_rect(fill = "aliceblue")) +
+  guides(color = guide_legend(override.aes = list(size = 4)))
+
+ggsave("ts_plot.png")
+
+plotly_plot <- ggplotly(plot)
+
+plotly_plot
+
+
+```
+
+**Decompose the Time Series:**
+Convert decomposed object to a data frame.
+Plot the data using autoplot.
+Save the image.
+```{r}
+data_ts <- ts(data_hourly$Count, frequency = 24) # Adjust frequency as needed
+
+data_ts_decomposed <- decompose(data_ts)
+
+autoplot(data_ts_decomposed)
+
+ggsave("ts_decomposed_plot.png")
+```
+
+
+**Create a MSTS Object:**
+Decompose the object.
+Plot the object.
+Save the image.
+```{r}
+battery_msts <- msts(data_hourly$Count, seasonal.periods = c(24,24*7,24*30))
+
+battery_msts_decompose <- mstl(battery_msts)
+
+autoplot(battery_msts_decompose)
+
+ggsave("ts_msts_plot.png")
+```

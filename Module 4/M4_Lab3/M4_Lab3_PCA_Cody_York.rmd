@@ -1,0 +1,58 @@
+---
+title: "M3_Lab3_PCA_Cody_York"
+output: html_notebook
+---
+
+**Setup**: Load necessary libraries and set working directory.
+```{r load-libraries, message=FALSE}
+library(FactoMineR)
+library(factoextra)
+library(corrplot)
+library(readxl)
+
+setwd('C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations/Module 4/M4_Lab3/')
+```
+
+**Load the data**
+```{r}
+data <- read_excel("Samples-1.xlsx")
+```
+
+**Describe the data**:
+
+```markdown
+The data represents the population count of seven different species (from species A to G) across six different sites. The variables chosen for this analysis are the counts of each species at each site, which are numerical and suitable for PCA. PCA is performed to reduce the dimensionality of the data and to identify the most important variables in the dataset that account for the most variance.
+```
+
+**Perform PCS Analysis**
+```{r pca-analysis}
+# Compute correlation matrix
+M <- cor(data[,2:8]) # Exclude the 'Sites' column for the correlation
+
+# Plot correlation matrix
+corrplot(M, method = "circle")
+
+# Perform PCA
+res.pca <- PCA(data[,2:8], scale.unit=TRUE, graph=FALSE) # Exclude the 'Sites' column for the PCA
+
+# Plot explained variances
+fviz_eig(res.pca,
+         addlabels = TRUE, # Add percentage labels on bars
+         ylim = c(0, 60), # Adjust the y-axis limits
+         barfill = "skyblue", # Fill color for the bars
+         barcolor = "black", # Border color for the bars
+         cumulative = TRUE, # Show cumulative contributions
+         cum.col = "red", # Color for the cumulative line
+         main = "Explained variance by dimensions") # Add a title
+
+# Plot variables
+fviz_pca_var(res.pca, col.var="contrib")
+
+# Plot individuals
+fviz_pca_ind(res.pca, geom="point", col.ind="cos2")
+```
+
+**Interpret the results**:
+```markdown
+The correlation plot shows that Species A and Species B are strongly correlated, while Species C and Species D are negatively correlated. The plot of explained variances indicates that the first two principal components explain a significant amount of the variance in the data. The variable plot shows which species contribute most to the principal components, indicating which species are most distinct in terms of population across the sites. The individuals plot shows how the sites are related to each other based on the principal components, indicating which sites have similar species populations.
+```

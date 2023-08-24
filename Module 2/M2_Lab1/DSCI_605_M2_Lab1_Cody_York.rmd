@@ -1,0 +1,50 @@
+---
+title: "DSCI_605_M2_Lab1_Cody_York"
+output: html_notebook
+---
+
+# Import the needed libraries and set the current working directory:
+```{r}
+library(dplyr)
+library(readr)
+library(knitr)
+
+setwd('C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations/Module 2/M2_Lab1/')
+```
+
+
+# Read the data
+```{r}
+crop.data <- read_csv("Crop_Range_GOES0901_R (1).csv")
+crop.data
+```
+
+
+# Select necessary columns
+```{r}
+crop.data.col <- crop.data %>%
+  select(year, jday, gmt, frp, BinTime)
+crop.data.col
+```
+
+
+# Filter the data where jday > 227
+```{r}
+crop.data.col.filter <- crop.data.col %>%
+  filter(jday > 227)
+crop.data.col.filter
+```
+
+# Group data based on Bintime and summarize the average of frp
+```{r}
+crop.data.col.filter.grouped <- crop.data.col.filter %>%
+  group_by(BinTime) %>%
+  summarise(avg_frp = mean(frp, na.rm = TRUE))
+crop.data.col.filter.grouped
+```
+
+# View the final cleaned data
+```{r}
+final_crop_data <- crop.data.col.filter.grouped
+print(final_crop_data)
+```

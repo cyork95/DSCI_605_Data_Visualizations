@@ -1,0 +1,281 @@
+---
+title: "M3_Lab3_Cody_York"
+output: html_notebook
+---
+
+# Import the required libraries and set the Working Directory
+```{r}
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+
+setwd('C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations/Module 3/M3_Lab2/')
+```
+
+# Read the CSV file
+```{r}
+df.crime <- read.csv("Crime and Employment-1.csv")
+head(df.crime)
+```
+
+# Calculate the crime and unemployment rate with the given formulas.
+## Also convert Crimnecases to a usable integer.
+```{r}
+df.crime.mutate <- df.crime %>%
+  mutate(Crimecases = gsub(",", "", Crimecases),
+         CrimeRate = as.integer(Crimecases) / Population,
+         UnemploymentRate = Sum_Unemployed / Sum_LaborForce)
+head(df.crime.mutate)
+```
+
+# Bubble Plot (Initial) + Box PLot (Initial)
+```{r}
+bubble_plot <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=Sum_Employed, color=State)) +
+  geom_point(alpha=0.6) +
+  scale_size(range = c(1,12)) +
+  theme_minimal() +
+  ggtitle("Bubble plot showing relationship between Income, Crime Rate, and Employment") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(bubble_plot)
+
+box_plot <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate, fill=State)) +
+  geom_boxplot() +
+  theme_minimal() +
+  ggtitle("Box plot showing the distribution of Crime Rate in different states") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="none")
+
+print(box_plot)
+```
+
+# Bubble plot with a different color palette and point shape
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+my_palette <- colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"))(number_of_states)
+
+bubble_plot_2 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=Sum_Employed, color=State)) +
+  geom_point(alpha=0.6, shape=17) +
+  scale_size(range = c(1,12)) +
+  #scale_color_manual(values = my_palette) +
+  labs(title = "Bubble plot (different style)",
+       x = "Income",
+       y = "Crime Rate",
+       color = "State") +
+  #theme_light() +
+  theme_minimal() +
+  theme(legend.position = "top",
+        plot.title = element_text(hjust = 0.5, face = "bold"))
+
+print(bubble_plot_2)
+```
+
+# Bubble plot with theme_gray and rainbow color scale
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+
+bubble_plot_3 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=Sum_Employed, color=State)) +
+  geom_point(alpha=0.6) +
+  scale_size(range = c(1,12)) +
+  scale_color_manual(values = rainbow(number_of_states)) +
+  theme_gray() +
+  ggtitle("Bubble plot (gray theme with manual colors)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="right")
+
+print(bubble_plot_3)
+```
+
+# Bubble plot with theme_classic and shape as cross
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+my_palette <- colorRampPalette(RColorBrewer::brewer.pal(12, "Paired"))(number_of_states)
+
+bubble_plot_4 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=Sum_Employed, color=State)) +
+  geom_point(alpha=0.6, shape=4) +
+  scale_size(range = c(1,12)) +
+  scale_color_manual(values = my_palette) +
+  theme_classic() +
+  ggtitle("Bubble plot (classic theme, cross shape)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="top")
+
+print(bubble_plot_4)
+```
+
+# Bubble plot with theme_bw and size reflecting UnemploymentRate
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+my_palette <- colorRampPalette(RColorBrewer::brewer.pal(8, "Dark2"))(number_of_states)
+
+bubble_plot_5 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=UnemploymentRate, color=State)) +
+  geom_point(alpha=0.6) +
+  scale_size(range = c(1,12)) +
+  scale_color_manual(values = my_palette) +
+  theme_bw() +
+  ggtitle("Bubble plot (bw theme, size reflecting unemployment)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(bubble_plot_5)
+```
+
+# Bubble plot with ligth theme and shape as diamond
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+my_palette <- colorRampPalette(RColorBrewer::brewer.pal(12, "Set3"))(number_of_states)
+
+bubble_plot_6 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=Sum_Employed, color=State)) +
+  geom_point(alpha=0.6, shape=18) +
+  scale_size(range = c(1,12)) +
+  scale_color_manual(values = my_palette) +
+  theme_light() +
+  ggtitle("Bubble plot (light theme, diamond shape)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="top")
+
+print(bubble_plot_6)
+```
+
+# Bubble plot with theme_tufte from ggthemes and size reflecting UnemploymentRate
+```{r}
+number_of_states <- length(unique(df.crime.mutate$State))
+my_palette <- colorRampPalette(RColorBrewer::brewer.pal(9, "Pastel1"))(number_of_states)
+
+bubble_plot_7 <- ggplot(df.crime.mutate, aes(x=Income, y=CrimeRate, size=UnemploymentRate, color=State)) +
+  geom_point(alpha=0.6) +
+  scale_size(range = c(1,12)) +
+  scale_color_manual(values = my_palette) +
+  theme_tufte() +
+  ggtitle("Bubble plot (Tufte theme, size reflecting unemployment)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("Income") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(bubble_plot_7)
+```
+
+# Box plot with different fill color and theme_dark
+```{r}
+box_plot_2 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate, fill=State)) +
+  geom_boxplot() +
+  theme_dark() +
+  ggtitle("Box plot (dark theme with gradient fill)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(box_plot_2)
+
+```
+
+# Box plot with theme_minimal and custom fill color
+```{r}
+box_plot_3 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate)) +
+  geom_boxplot(fill = "lightblue", color = "black") +
+  theme_minimal() +
+  ggtitle("Box plot (minimal theme with custom fill color)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="none")
+
+print(box_plot_3)
+```
+
+# Box plot with theme_void and fill color
+```{r}
+box_plot_4 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate, fill=State)) +
+  geom_boxplot() +
+  theme_void() +
+  ggtitle("Box plot (void theme with gradient fill)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(box_plot_4)
+```
+
+# Box plot with theme_linedraw and custom fill color
+```{r}
+box_plot_5 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate)) +
+  geom_boxplot(fill = "yellow", color = "black") +
+  theme_linedraw() +
+  ggtitle("Box plot (linedraw theme with custom fill color)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="none")
+
+print(box_plot_5)
+```
+
+# Box plot with theme_economist and fill color reflecting Income
+```{r}
+box_plot_6 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate, fill=State)) +
+  geom_boxplot() +
+  theme_economist() +
+  ggtitle("Box plot (Economist theme with gradient fill)") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="bottom")
+
+print(box_plot_6)
+```
+
+# Box plot with theme_stata and custom fill color
+```{r}
+box_plot_7 <- ggplot(df.crime.mutate, aes(x=State, y=CrimeRate)) +
+  geom_boxplot(fill = "purple", color = "black") +
+  theme_stata() +
+  ggtitle("Box plot (Stata theme with custom fill color)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  xlab("State") +
+  ylab("Crime Rate") +
+  theme(legend.position="none")
+
+print(box_plot_7)
+```
+
+
+# My Favorite Plots are bubble_plot_2 and box_plot_7 (shown below)
+```{r}
+print(bubble_plot_2)
+
+print(box_plot_6)
+
+ggsave("best_bubble_plot.png", bubble_plot_2)
+ggsave("best_box_plot.png", box_plot_6)
+```
+    1. What information you planned to deliver:
+        The intent behind creating these plots was to provide an in-depth analysis of how income, unemployment rate, and employment influence crime rate across different states. Through these visualizations, we aim to understand if there are patterns or trends that indicate the relationship between these socio-economic indicators and crime rate.
+    2. Why you choose using bubble and box plots here:
+        The choice of bubble plots and box plots is strategic and tailored to the nature of our data.
+
+        **Bubble plots**: Bubble plots are an effective way to visualize data that involves three dimensions or variables. In our case, these three variables are income, crime rate, and employment. Each bubble's x and y positions correspond to the values of income and crime rate, while the bubble size represents the level of employment. This way, we get a clear visual representation of all three variables in one plot.
+
+        **Box plots**: Box plots are great for showing the distribution of a quantitative variable (in our case crime rate) across different categories of another variable (State). They give a quick glance at the median, quartiles, and potential outliers, which are useful to compare crime rates across different states.
+    4. The reasons why the graph is the best and what are the possible problems with other graphs:
+
+        The enhanced bubble plot with the adjusted size scale and color aesthetic according to different states, I believe, is the best graph among others. It not only visualizes the relationship between income and crime rate but also illustrates the additional dimension of employment. Furthermore, the use of colors makes it easier to distinguish data from different states. However, one potential problem with this plot is that when there are too many categories in the color aesthetic (in this case, states), it can lead to a crowded legend and might cause difficulty in distinguishing between different categories. I think the triangle symbol looks the best to me. The points help me make out where things are in the graph and is easier to see overlap then the circles I think.
+
+
+        The box plots also provide insightful information about the distribution of crime rate across states. The one using the 'Economist' theme, with the gradient fill and vertical x-axis labels, is the most readable. It best addresses the issue of overlapping x-axis labels. However, box plots are less effective when we have a dataset with many categories, as the box and whisker marks can become too condensed, making it hard to discern. I think the others didn't have good colors and this one to me looks the best.

@@ -1,0 +1,91 @@
+---
+title: "M6_Lab5_Spatial_Mapping_Cody_York"
+output: html_notebook
+---
+
+**Install necessary packages:** Set working directory
+```{r}
+library(ggplot2)
+library(readr)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(raster)
+library(scales)
+library(tmap)
+
+setwd('C:/Users/cy_su/PycharmProjects/DSCI_605_Data_Visualizations/Module 6/M6_Lab5/')
+```
+
+**Lab 1: Load the Data:**
+```{r}
+plot_locations <- read_csv("HARV_PlotLocations.csv")
+raster_image <- raster("HARV_chmCrop.tif")
+```
+
+**Lab 1: Convert raster to a data frame for ggplot2:**
+```{r}
+raster_df <- as.data.frame(rasterToPoints(raster_image))
+names(raster_df) <- c("easting", "northing", "value")
+```
+
+**Lab 1: Plot the Raster Image:**
+Provide a legend title and better color gradient for the raster.
+Add an outline to the points and makes them more visible.
+Add a caption and refines labels.
+Apply a minimalistic theme for a cleaner look.
+Adjust text sizes and styles for better readability and aesthetics.
+```{r}
+ggplot() +
+  geom_raster(data = raster_df, aes(x = easting, y = northing, fill = value)) +
+  scale_fill_gradientn(colors = terrain.colors(10), name = "Elevation") +
+  geom_point(data = plot_locations, aes(x = easting, y = northing), color = "red", size = 4, shape = 21, fill = "white") +
+  labs(title = "Plot Locations on Elevation Map", x = "Easting (m)", y = "Northing (m)", caption = "Source: HARV Dataset") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 20),
+    axis.title = element_text(face = "bold", size = 14),
+    legend.title = element_text(face = "bold", size = 12),
+    legend.text = element_text(size = 12),
+    plot.caption = element_text(hjust = 0, size = 10)
+  ) +
+  coord_cartesian(expand = FALSE)
+```
+
+**Lab 2: Load the Data:**
+```{r}
+watersheds <- st_read("Watersheds_HUC08_2009/WATERSHEDS_HUC08_2009_USDA_IN.shp")
+states <- st_read("tl_2019_us_state/tl_2019_us_state.shp")
+```
+
+**Set the theme:**
+```{r}
+tmap_mode("view")
+```
+
+**Plot the Data:**
+Set a color palette.
+Change the color of states to a simple grey to make the watersheds more visible
+For the watersheds adds a white border and sets up a pop-up showing the square miles of the area when an area is clicked on
+```{r}
+palette <- RColorBrewer::brewer.pal(9, "YlGnBu")
+
+tm_shape(states) +
+  tm_polygons(col = "grey70", border.col = "grey40") +
+  tm_shape(watersheds) +
+  tm_polygons(col = "HUC_8", palette = palette, title = "Watershed (HUC_8)",
+              border.col = "white", border.alpha = .5, id = "HUC_8",
+              popup.vars = c("Area (sq miles)" = "SQ_MILES")) +
+  tm_compass(type = "arrow", position = c("left","top"), size = 1.5) +
+  tm_scale_bar(breaks = c(0, 50, 100), position = c("right","bottom"), size = 1) +
+  tm_layout(main.title = "Watershed Map of Indiana (HUC_8)",
+            main.title.position = "center",
+            legend.position = c("left","bottom"),
+            legend.text.size = 0.7,
+            legend.title.size = 0.9,
+            legend.bg.color = "white",
+            legend.bg.alpha = 0.5,
+            legend.frame = TRUE,
+            frame = FALSE)
+```
